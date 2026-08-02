@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure React App learning</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #38435c, #34bd46, #6f46b4);
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #38bdf8;
+            border-radius: 50%;
+            top: 10%;
+            left: 15%;
+            filter: blur(80px);
+            opacity: 0.6;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #ec4899;
+            border-radius: 50%;
+            bottom: 10%;
+            right: 15%;
+            filter: blur(80px);
+            opacity: 0.6;
+        }
+
+        #root {
+            position: relative;
+            z-index: 10;
+        }
+
+        .clock-card {
+            width: 480px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 25px;
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .clock-title {
+            font-size: 22px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            opacity: 0.85;
+        }
+
+        .clock-time {
+            font-size: 52px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.45);
+        }
+
+        .clock-subtitle {
+            margin-top: 15px;
+            font-size: 16px;
+            opacity: 0.75;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <div id="root"> </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+
+    <script>
+        function App() {
+            // const time = new Date().toLocaleTimeString();
+            const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+
+            React.useEffect(function () {
+                setInterval(function () {
+                    setTime(new Date().toLocaleTimeString())
+                }, 1000);
+
+            }, [])
+
+            // return React.createElement("header", null, `Hello React! Its ${time}`);
+
+
+            return React.createElement(
+                "div",
+                {className: "clock-card"},
+                React.createElement("h2", {className: "clock-title"}, "Hello React By Keertan"),
+                React.createElement("div", {className: "clock-time"}, time),
+                React.createElement("p", {className: "clock-subtitle"}, "Pure React Digital Clock")
+            );
+
+
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(React.createElement(App));
+    </script>
+
+
+</body>
+
+</html>
