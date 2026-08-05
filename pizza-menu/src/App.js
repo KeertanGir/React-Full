@@ -1,4 +1,4 @@
-import './App.css';
+
 import './index.css'
 
 function Pizza() {
@@ -11,16 +11,40 @@ function Pizza() {
   </div> );
 }
 
+function Headers() {
+
+  // const style = { color: "red", textTransform : "uppercase" , fontSize : "38px" };
+
+  return ( 
+    <header className='header' >
+      <h1>Pizzalo React pizza Co.</h1> 
+    </header>
+  )
+}
+
+function Footer() {
+  return ( <footer className='footer' > `{new Date().toLocaleTimeString()}  We are Open here `</footer> )
+}
+
+function Menu() {
+  return ( <main className='menu' > 
+    <h2>Our Menu</h2>  
+    <Pizza />
+    <Pizza />
+    <Pizza />
+    <Pizza />
+    <Pizza />  
+    </main> );
+}
+
+
 function App() {
   return (
-    <>
-    <h1>Pizza Shop</h1>
-    <Pizza />
-    <Pizza />
-    <Pizza />
-    <Pizza />
-    <Pizza />
-    </>
+    <div  className='container' >
+    <Headers />
+    <Menu />
+    <Footer />
+    </div>
   );
 
 }
