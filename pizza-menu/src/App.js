@@ -1,13 +1,16 @@
 
 import './index.css'
 
-function Pizza() {
-  return ( <div>
-    <img src='pizzas/focaccia.jpg' alt='focaccia'></img>
-    <h1>Name : Focaccia </h1>
-    <p>Ingrediants : Bread with italian olive oil and rosemary</p>
-    <p>Price : 6$</p>
-    <p>soldOut : false</p>
+function Pizza(props) {
+  return ( <div className='pizza' >
+    <img src={props.picloc} alt={props.name}></img>
+    <div>
+    <h3>{props.name}</h3>
+    <p>{props.ingrediants}</p>
+    <p> {props.soldOut ?  "Available" : "Out of Stock" }</p>
+
+    <span>{props.price}$</span>
+    </div>
   </div> );
 }
 
@@ -29,11 +32,20 @@ function Footer() {
 function Menu() {
   return ( <main className='menu' > 
     <h2>Our Menu</h2>  
-    <Pizza />
-    <Pizza />
-    <Pizza />
-    <Pizza />
-    <Pizza />  
+    <Pizza 
+      name="Focaccia" 
+      ingrediants = "Bread with italian olive oil and rosemary" 
+      price = {6} 
+      picloc="pizzas/focaccia.jpg" 
+      soldOut={false} />
+
+    <Pizza 
+      name="Pizza Margherita" 
+      ingrediants = "Tomato and mozarella" 
+      price = {10} 
+      picloc="pizzas/margherita.jpg" 
+      soldOut={true} />  
+
     </main> );
 }
 
