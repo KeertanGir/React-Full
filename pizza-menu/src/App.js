@@ -80,16 +80,34 @@ function Headers() {
 }
 
 function Footer() {
-  return ( <footer className='footer' > `{new Date().toLocaleTimeString()}  We are Open here `</footer> )
+
+  const hr = new Date().getHours();
+  const startHr = 12;
+  const closedHr = 22;
+  const isOpen = hr >= startHr && hr <= closedHr ; 
+  // {new Date().toLocaleTimeString()} 
+  console.log(isOpen)
+  return ( <footer className='footer' >
+  
+    { isOpen && <div className='order'>
+          <p>We are Open till {closedHr}:00 please Order Between {startHr}:00 to {closedHr}:00  </p>
+          <button className='btn' >Order</button>
+        </div>
+    }
+     </footer> )
 }
 
 function Menu() {
   const pizza = pizzaData;
+  // const pizzaLen = 0; 
+  const pizzaLen = pizza.length; 
+
   return ( <main className='menu' > 
     <h2>Our Menu</h2> 
     <div className='pizzas' >
+
       {
-        pizza.map((pizzas) => {
+        pizzaLen > 0 &&  pizza.map((pizzas) => {
           return (
               <Pizza pizza={pizzas}  key={ pizzas.name }
                  />
