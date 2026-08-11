@@ -1,7 +1,5 @@
-
 import './index.css'
-
-
+// import './gptStyle.css'
 
 const pizzaData = [
   {
@@ -57,21 +55,19 @@ const pizzaData = [
 
 function Pizza(props) {
   return (   
-  <div className='pizza' >
+  <li className={ `pizza ${ props.pizza.soldOut ? "sold-out" : ""} ` } >
     <img src={props.pizza.photoName} alt={props.pizza.name}></img>
     <div>
-    <h3>{props.pizza.name}</h3>
-    <p>{props.pizza.ingredients}</p>
-    <p> {props.pizza.soldOut ? "Out of Stock" : "Available"  }</p>
-    <span>{props.pizza.price}$</span>
+      <h3>{props.pizza.name}</h3>
+      <p>{props.pizza.ingredients}</p>
+      <p> {props.pizza.soldOut ? "Out of Stock" : "Available"  }</p>
+      <span>{props.pizza.price}$</span>
     </div>
-  </div> );
+  </li> );
 }
 
 function Headers() {
-
   // const style = { color: "red", textTransform : "uppercase" , fontSize : "38px" };
-
   return ( 
     <header className='header' >
       <h1>Pizzalo React pizza Co.</h1> 
@@ -80,7 +76,6 @@ function Headers() {
 }
 
 function Footer() {
-
   const hr = new Date().getHours();
   const startHr = 12;
   const closedHr = 22;
@@ -89,34 +84,46 @@ function Footer() {
   console.log(isOpen)
   return ( <footer className='footer' >
   
-    { isOpen && <div className='order'>
-          <p>We are Open till {closedHr}:00 please Order Between {startHr}:00 to {closedHr}:00  </p>
-          <button className='btn' >Order</button>
-        </div>
+    { isOpen ? <Order closedHr = {closedHr} startHr= {startHr} />
+        : (<p>We Welcome You In Between {startHr}:00 to {closedHr}:00 We are Closed Now </p>)
     }
      </footer> )
 }
+
+function Order({closedHr , startHr}){
+    return (
+      <div className='order'>
+          <p>We are Open till {closedHr}:00 please Order Between {startHr}:00 to {closedHr}:00  </p>
+          <button className='btn' >Order</button>
+        </div>
+    );
+}
+
 
 function Menu() {
   const pizza = pizzaData;
   // const pizzaLen = 0; 
   const pizzaLen = pizza.length; 
-
-  return ( <main className='menu' > 
+  return ( 
+  <main className='menu' > 
     <h2>Our Menu</h2> 
-    <div className='pizzas' >
-
+    <p>We are here to presenting you our Best { pizzaLen } Dishes To You, Enjoy Your Meal</p>
+    <ul className='pizzas' >
       {
-        pizzaLen > 0 &&  pizza.map((pizzas) => {
+        pizzaLen > 0 ? 
+        
+        
+        pizza.map((pizzas) => {
           return (
-              <Pizza pizza={pizzas}  key={ pizzas.name }
-                 />
+            <>            
+              <Pizza pizza={pizzas}  key={ pizzas.name } />
+
+            </>
+     
           );
-        })
+        })   : ( <p> We are Making Your Dishes Just Wait for a While </p> )
       }
       
-
-
       {/* <Pizza 
         name="Focaccia" 
         ingrediants = "Bread with italian olive oil and rosemary" 
@@ -130,7 +137,7 @@ function Menu() {
         price = {10} 
         picloc="pizzas/margherita.jpg" 
         soldOut={true} />   */}
-    </div> 
+    </ul> 
     </main> );
 }
 

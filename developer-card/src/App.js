@@ -3,7 +3,7 @@ function App() {
   return (
     
     <div className="card-container" >
-      <Card avatarLoc="images/Keertan.jpeg" avatarName="Keertan"  Username = "Keertan Gir"  UserAbout = "Iam Keertan gir A Java and React FullStack Developer With Spring Boot."  skills= { [ 
+      <Card avatarLoc="images/Keertan.jpeg" avatarName="Keertan"  Username = "Keertan Gir Goswami"  UserAbout = "Iam Keertan gir A Java and React FullStack Developer With Spring Boot."  skills= { [ 
         {
           name : "Java",
           emoji : "✅",
@@ -32,34 +32,7 @@ function App() {
 
            ] } />
 
-             <Card avatarLoc="images/Keertan.jpeg" avatarName="Keertan"  Username = "Keertan Gir"  UserAbout = "Iam Keertan gir A Java and React FullStack Developer With Spring Boot."  skills= { [ 
-        {
-          name : "Java",
-          emoji : "✅",
-          color : "Red"      
-        },
-        {
-          name : "SpringBoot",
-          emoji : "✅",
-          color : "green"      
-        },
-        {
-          name : "React",
-          emoji : "✅",
-          color : "blue"      
-        },
-        {
-          name : "Mysql",
-          emoji : "✅",
-          color : "Orange"      
-        },
-        {
-          name : "JavaScript",
-          emoji : "✅",
-          color : "yellow"      
-        }
-
-           ] } />
+          
     
 
     </div>

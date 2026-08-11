@@ -1,0 +1,591 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  color: #1f2937;
+  font-weight: 400;
+  min-height: 100vh;
+  padding: 4rem 2.4rem 7rem;
+
+  background:
+    radial-gradient(circle at top left, rgba(251, 191, 36, 0.18), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.14), transparent 35%),
+    linear-gradient(135deg, #fffdf7 0%, #fff8e8 50%, #f8f4eb 100%);
+
+  border-bottom: 1rem solid #f5b82e;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+  width: 100%;
+  max-width: 110rem;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+
+  padding: 4rem;
+
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 3rem;
+
+  box-shadow:
+    0 2rem 6rem rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(245, 184, 46, 0.06);
+
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  width: 35rem;
+  height: 35rem;
+  border-radius: 50%;
+  background: rgba(245, 184, 46, 0.09);
+  top: -20rem;
+  right: -12rem;
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  align-self: stretch;
+  position: relative;
+  z-index: 1;
+}
+
+.header h1 {
+  color: #d79400;
+
+  text-transform: uppercase;
+  text-align: center;
+
+  font-size: clamp(3.6rem, 6vw, 6.4rem);
+  font-weight: 700;
+  letter-spacing: 0.5rem;
+
+  position: relative;
+  width: 100%;
+  display: block;
+
+  line-height: 1.1;
+
+  background: linear-gradient(
+    90deg,
+    #ba7800,
+    #f4b824,
+    #d98900
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  text-shadow: 0 1rem 3rem rgba(237, 184, 48, 0.15);
+}
+
+.header h1::before,
+.header h1::after {
+  display: block;
+  content: '';
+
+  height: 4px;
+  width: clamp(3rem, 10vw, 10rem);
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #f0b82e
+  );
+
+  position: absolute;
+  top: 50%;
+  border-radius: 999px;
+}
+
+.header h1::before {
+  left: 0;
+}
+
+.header h1::after {
+  right: 0;
+  transform: rotate(180deg);
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+
+  position: relative;
+  z-index: 1;
+}
+
+.menu h2 {
+  display: inline-block;
+
+  padding: 1.2rem 2.4rem;
+
+  border-top: 2px solid #e6a91b;
+  border-bottom: 2px solid #e6a91b;
+
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.4rem;
+  font-weight: 700;
+
+  color: #292524;
+
+  background: rgba(255, 255, 255, 0.5);
+
+  border-radius: 0.8rem;
+}
+
+.menu > p {
+  max-width: 72rem;
+  width: 90%;
+
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 1.8;
+
+  color: #5c554c;
+}
+
+/* =========================
+   PIZZA GRID
+========================= */
+
+.pizzas {
+  width: 100%;
+
+  list-style: none;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 2.4rem;
+}
+
+/* =========================
+   PIZZA CARD
+========================= */
+
+.pizza {
+  display: flex;
+  gap: 2rem;
+
+  padding: 2rem;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(234, 179, 45, 0.16);
+  border-radius: 2rem;
+
+  box-shadow:
+    0 1rem 3rem rgba(35, 28, 15, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.pizza::before {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(245, 184, 46, 0.05),
+    transparent 45%
+  );
+
+  pointer-events: none;
+}
+
+.pizza:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 2rem 5rem rgba(43, 34, 20, 0.12);
+
+  border-color: rgba(230, 169, 27, 0.45);
+}
+
+.pizza img {
+  width: 14rem;
+  height: 14rem;
+
+  object-fit: cover;
+  aspect-ratio: 1;
+
+  align-self: start;
+
+  border-radius: 1.8rem;
+
+  box-shadow:
+    0 1rem 2.5rem rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.pizza:hover img {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.pizza div {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 0.4rem 0;
+}
+
+.pizza h3 {
+  font-size: 2rem;
+  font-weight: 700;
+
+  color: #2d2926;
+
+  line-height: 1.3;
+}
+
+.pizza p {
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+
+  color: #6e665d;
+
+  line-height: 1.65;
+
+  margin-bottom: auto;
+}
+
+.pizza span {
+  width: fit-content;
+
+  display: inline-flex;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  color: #9b6500;
+
+  padding: 0.7rem 1.2rem;
+
+  background: #fff5cf;
+
+  border: 1px solid #f2d26a;
+  border-radius: 999px;
+}
+
+/* =========================
+   SOLD OUT
+========================= */
+
+.pizza.sold-out {
+  color: #8b8b8b;
+
+  background: rgba(242, 242, 242, 0.8);
+
+  border-color: rgba(120, 120, 120, 0.14);
+
+  box-shadow: none;
+
+  opacity: 0.75;
+}
+
+.pizza.sold-out:hover {
+  transform: none;
+}
+
+.pizza.sold-out img {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+.pizza.sold-out span {
+  color: #6b7280;
+  background: #ececec;
+  border-color: #d5d5d5;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  width: 100%;
+
+  font-size: 1.4rem;
+  text-align: center;
+
+  color: #6b6258;
+
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   ORDER
+========================= */
+
+.order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.order p {
+  font-size: 1.5rem;
+  line-height: 1.7;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn {
+  position: relative;
+  overflow: hidden;
+
+  color: #1f1a0f;
+
+  font-family: inherit;
+  border: none;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  background: linear-gradient(
+    135deg,
+    #f7c744,
+    #eaa91c
+  );
+
+  padding: 1.5rem 3.4rem;
+
+  border-radius: 1.2rem;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 1rem 2.5rem rgba(215, 148, 0, 0.24);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.btn::before {
+  content: '';
+
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: -120%;
+
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 80%
+  );
+
+  transition: left 0.6s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+
+  background: linear-gradient(
+    135deg,
+    #ffd75f,
+    #eba315
+  );
+
+  box-shadow:
+    0 1.5rem 3rem rgba(215, 148, 0, 0.32);
+}
+
+.btn:hover::before {
+  left: 120%;
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(230, 169, 27, 0.35);
+  outline-offset: 4px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+  body {
+    padding: 2.5rem 1.6rem 5rem;
+  }
+
+  .container {
+    padding: 3rem 2.2rem;
+    gap: 4rem;
+    border-radius: 2.4rem;
+  }
+
+  .pizzas {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1::before,
+  .header h1::after {
+    width: 5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 58%;
+  }
+
+  body {
+    padding: 1.6rem 1.2rem 4rem;
+  }
+
+  .container {
+    padding: 2.4rem 1.5rem;
+    gap: 3.2rem;
+    border-radius: 2rem;
+  }
+
+  .header h1 {
+    letter-spacing: 0.25rem;
+  }
+
+  .header h1::before,
+  .header h1::after {
+    display: none;
+  }
+
+  .menu {
+    gap: 2.5rem;
+  }
+
+  .menu h2 {
+    letter-spacing: 0.2rem;
+  }
+
+  .menu > p {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+
+  .pizza {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .pizza img {
+    width: 11rem;
+    height: 11rem;
+    border-radius: 1.4rem;
+  }
+
+  .pizza h3 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    padding: 2rem 1.2rem;
+  }
+
+  .pizza {
+    flex-direction: column;
+  }
+
+  .pizza img {
+    width: 100%;
+    height: 20rem;
+  }
+
+  .pizza div {
+    width: 100%;
+  }
+
+  .pizza span {
+    margin-top: 0.5rem;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 30rem;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
