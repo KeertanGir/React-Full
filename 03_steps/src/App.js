@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 
 const messages = [
@@ -7,27 +8,41 @@ const messages = [
 ];
 
 function App() {
-  const count = 3;
+
+   const [step , setStep] = useState(1);
+   const [test, setTest] = useState({name : "Keertan"})
+ 
 
 
   function handlePrevious(){
-       alert("Clicked on Previous")
+    if(step <= 1 ){
+      alert(`You react Your Limit 1`)
+    }else{
+      setStep(step - 1)
+      setTest({name  : "Keertan" })
+    }
   }
 
   function handleNext(){
-    alert("Clicked on Next")
+    // alert("Clicked on Next")
+    if(step >= messages.length ){
+      alert(`You react Your Limit ${messages.length}`)
+    }else{
+      setStep(step + 1);
+      setTest({name  : "Keertan Gir" })
+    }
   }
 
 
   return (
       <div className="steps" >
         <div className="numbers">
-          <div className={`${count >= 1  ? "active" : ""}  `} >1</div>
-          <div className={`${count >= 2  ? "active" : ""}  `} >2</div>
-          <div className={`${count >= 3  ? "active" : ""}  `} >3</div>
+          <div className={ step >= 1  ? "active" : "" } >1</div>
+          <div className={ step >= 2  ? "active" : "" } >2</div>
+          <div className={ step >= 3  ? "active" : "" }>3</div>
         </div>
 
-        <p className="message" >Step {count} :- {messages[count -1]} </p>
+        <p className="message" >Step {step} :- {messages[step -1]} {test.name} </p>
 
         <div className="buttons" >
           <button className="button" style={ {backgroundColor: "#77b3ec82", color: "#585d5e"}}
