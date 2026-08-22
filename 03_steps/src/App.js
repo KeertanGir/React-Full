@@ -11,6 +11,7 @@ function App() {
 
    const [step , setStep] = useState(1);
    const [test, setTest] = useState({name : "Keertan"})
+   const [isOpen, setIsOpen] = useState(true)
  
 
 
@@ -18,7 +19,7 @@ function App() {
     if(step <= 1 ){
       alert(`You react Your Limit 1`)
     }else{
-      setStep(step - 1)
+      setStep((s) => s-1)
       setTest({name  : "Keertan" })
     }
   }
@@ -28,14 +29,16 @@ function App() {
     if(step >= messages.length ){
       alert(`You react Your Limit ${messages.length}`)
     }else{
-      setStep(step + 1);
+      setStep((s) => s + 1);
       setTest({name  : "Keertan Gir" })
     }
   }
 
 
   return (
-      <div className="steps" >
+    <>
+      <button className="close" onClick={() => setIsOpen( (is) =>  !is )}>&times;</button>
+      { isOpen && <div className="steps" >
         <div className="numbers">
           <div className={ step >= 1  ? "active" : "" } >1</div>
           <div className={ step >= 2  ? "active" : "" } >2</div>
@@ -52,8 +55,9 @@ function App() {
                onClick={handleNext}
           > <span> Next </span> </button>
         </div>
-
       </div>
+   } 
+   </>
   );
 }
 
