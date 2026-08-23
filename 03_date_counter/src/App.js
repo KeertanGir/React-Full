@@ -34,17 +34,19 @@ function App() {
   return (
     <>
 
+      
+
+      <button onClick={handleCountSub} > - </button>
       <h1>{count}</h1>
-
-      <button onClick={handleCountSub} > -1 </button>
-      <button onClick={handleCountAdd} > +1 </button>
+      <button onClick={handleCountAdd} > + </button>
 
 
 
+      
+
+      <button onClick={handleSub} > - </button>
       <h1>{offSet}</h1>
-
-      <button onClick={handleSub} > -1 </button>
-      <button onClick={handleAdd} > +1 </button>
+      <button onClick={handleAdd} > + </button>
 
 
       <h1> {
