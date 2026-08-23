@@ -1,5 +1,6 @@
 function PastMessage( { selectedDate } ){
-         <h1>
+        
+        return(<h1>
         
           In Past It was the date  
            <strong> {selectedDate.getDate()} / 
@@ -9,6 +10,7 @@ function PastMessage( { selectedDate } ){
             weekday: "long"
           })} </strong>
         </h1>
+        )
 }
 
 export default PastMessage;

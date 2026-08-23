@@ -1,5 +1,6 @@
 function FutureMessage( { selectedDate } ){
-         <h1>
+         
+       return( <h1>
         
            In Future it whould be the date   
            <strong> {selectedDate.getDate()} / 
@@ -9,6 +10,7 @@ function FutureMessage( { selectedDate } ){
             weekday: "long"
           })} </strong>
         </h1>
+        )
 }
 
 export default FutureMessage;
