@@ -1,4 +1,7 @@
 import { useState } from "react";
+import TodayMessage from "./TodayMessage";
+import PastMessage from "./PastMessage";
+import FutureMessage from "./FutureMessage";
 
 
 function App() {
@@ -49,7 +52,7 @@ function App() {
       <button onClick={handleAdd} > + </button>
 
 
-      <h1> {
+      {/* <h1> {
         offSet === 0 ? (
           `Today Date is  
           ${selectedDate.getDate()} / 
@@ -74,8 +77,14 @@ function App() {
              and the ${selectedDate.toLocaleDateString(
             "en-Us", {
               weekday: "long",
-            })}.` ) }</h1>
+            })}.` ) }</h1> */}
 
+
+          {
+            offSet === 0 ? <TodayMessage selectedDate= {selectedDate} />
+          : (offSet < 0 ?  <PastMessage selectedDate= {selectedDate} />
+             : <FutureMessage selectedDate={selectedDate}/> ) }
+      
     </>
   );
 }
