@@ -28,6 +28,11 @@ h1 {
   color: #242424;
 }
 
+h1 > strong {
+  margin: 20px 0;
+  color: #2fa0c2;
+}
+
 /* Count and offset numbers */
 #root > h1:nth-of-type(1),
 #root > h1:nth-of-type(2) {
