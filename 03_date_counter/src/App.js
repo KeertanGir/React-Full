@@ -59,7 +59,7 @@ function App() {
             weekday: "long"
           })}`)
           
-          : (count < 0) ? `
+          : (offSet < 0 ? `
            In Past It was the date  
            ${selectedDate.getDate()} 
            / ${selectedDate.getMonth()} 
@@ -74,7 +74,7 @@ function App() {
              and the ${selectedDate.toLocaleDateString(
             "en-Us", {
               weekday: "long",
-            })}.`  }</h1>
+            })}.` ) }</h1>
 
     </>
   );
