@@ -8,6 +8,7 @@ function App() {
 
   const [count, setCount] = useState(1);
   const [offSet, setOffSet] = useState(0);
+  const [mode, setMode] = useState(true);
 
   const selectedDate = new Date();
   selectedDate.setDate(selectedDate.getDate() + offSet)
@@ -24,11 +25,21 @@ function App() {
   }
 
   function handleAdd() {
-    setOffSet((minus) => minus + count)
+    setOffSet((minus) => minus + Number(count))
   }
 
   function handleSub() {
     setOffSet((minus) => minus - count)
+  }
+
+
+  function handleReset() {
+    setCount(1);
+    setOffSet(0)
+  }
+
+  function handleMode() {
+    setMode((s) => !s)
   }
 
 
@@ -37,11 +48,23 @@ function App() {
   return (
     <>
 
-      
 
-      <button onClick={handleCountSub} > - </button>
-      <h1>{count}</h1>
-      <button onClick={handleCountAdd} > + </button>
+      <em onClick={handleMode} > {mode ? "❇" : "🔗"}  </em>
+      {mode ? (
+        <>
+          <button onClick={handleCountSub} > - </button>
+          <h1>{count}</h1>
+          <button onClick={handleCountAdd} > + </button>
+        </>
+      )
+        : (
+        <>
+          <input type="range"  max={10} min={1} value={ count } 
+            onChange={(e) => setCount(e.target.value )} /> 
+            <h1>{count}</h1>
+        </>
+        )     
+      }
 
 
 
@@ -80,11 +103,14 @@ function App() {
             })}.` ) }</h1> */}
 
 
-          {
-            offSet === 0 ? <TodayMessage selectedDate= {selectedDate} />
-          : (offSet < 0 ?  <PastMessage selectedDate= {selectedDate} />
-             : <FutureMessage selectedDate={selectedDate}/> ) }
-      
+      {
+        offSet === 0 ? <TodayMessage selectedDate={selectedDate} />
+          : (offSet < 0 ? <PastMessage selectedDate={selectedDate} />
+            : <FutureMessage selectedDate={selectedDate} />)}
+
+
+      <button onClick={handleReset} > Reset </button>
+
     </>
   );
 }
