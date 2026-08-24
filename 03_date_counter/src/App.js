@@ -14,7 +14,7 @@ function App() {
   selectedDate.setDate(selectedDate.getDate() + offSet)
 
   function handleCountAdd() {
-    setCount((minus) => minus + 1)
+    setCount((minus) =>  minus + 1)
   }
 
   function handleCountSub() {
@@ -39,6 +39,7 @@ function App() {
   }
 
   function handleMode() {
+    setCount(count)
     setMode((s) => !s)
   }
 
@@ -60,7 +61,7 @@ function App() {
         : (
         <>
           <input type="range"  max={10} min={1} value={ count } 
-            onChange={(e) => setCount(e.target.value )} /> 
+            onChange={(e) => setCount( Number( e.target.value ) )} /> 
             <h1>{count}</h1>
         </>
         )     
