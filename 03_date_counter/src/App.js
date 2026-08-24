@@ -9,7 +9,7 @@ function App() {
   const [count, setCount] = useState(1);
   const [offSet, setOffSet] = useState(0);
   const [mode, setMode] = useState(true);
-
+  
   const selectedDate = new Date();
   selectedDate.setDate(selectedDate.getDate() + offSet)
 
