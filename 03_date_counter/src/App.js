@@ -109,9 +109,10 @@ function App() {
           : (offSet < 0 ? <PastMessage selectedDate={selectedDate} />
             : <FutureMessage selectedDate={selectedDate} />)}
 
-
+      { ( offSet !== 0 || count !== 1) ? ( 
       <button onClick={handleReset} > Reset </button>
-
+      ) : (null)
+      }
     </>
   );
 }
