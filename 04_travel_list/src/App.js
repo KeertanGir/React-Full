@@ -14,11 +14,19 @@ const initialItems = [
 // isko create krne k sath sath ki Export kr rahy hain.
 // this is the main second Parent Component after index.js .
 export default function App() {
+
+  const [items, setItems] = useState( [] );
+
+    function addItems(item){
+      setItems([...items, item]);
+    }
+
+
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackageList />
+      <Form onAddItems={addItems} />
+      <PackageList items= { items} />
       <Status />
 
     </div>
@@ -37,12 +45,15 @@ function Logo() {
 
 // this is the main component that handle the All Form and user intraction and it is responsible for the 
 // creating items and other things.
-function Form() {
+// We can also pass the state through the props
+function Form( { onAddItems } ) {
 
   // here we declare the states and uses the useState("") hook that we import from the react and destructre that
   // arry and use them in out this components
   const [description, setDescription] = useState("");
-  const [items, setItems] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+ 
+
 
 // this funtion is responsible for the handling the submition of the Form
   function handleOnSubmit(e) {
@@ -51,18 +62,22 @@ function Form() {
     // like isme yeh hy k yeh page ko submission ke bad reload krne se rokta hy
   e.preventDefault();
 
+  
+
   // simple JS - custom validation that helps to stop the empty entries
   if(!description) return;
 
   // creating new object for the item
-  const newItem = { description , items, packed: false , id: Date.now() } 
+  const newItem = { description , quantity, packed: false , id: Date.now() } 
 
+
+  onAddItems(newItem);
 
   console.log(newItem);
 
   // making states on the initial states
   setDescription("");
-  setItems(1);
+  setQuantity(1);
 
   // this the concept of the Controlled Elements in which we controls the form elements 
 
@@ -76,9 +91,8 @@ function Form() {
       <h3> What You need for your ✈ trip </h3>
 
       {/* controlling Elements with the use of state and the value and onchange props in these elements */}
-      <select value={items} onChange={(e) => {
-        console.log(e.target.value)
-        setItems( Number( e.target.value ))}}  >
+      <select value={quantity} onChange={(e) => {
+        setQuantity( Number( e.target.value ))}}  >
 
 
           {/* rendring the quantity options in dunamic way */}
@@ -101,12 +115,12 @@ function Form() {
     </form>)
 }
 
-function PackageList() {
+function PackageList( { items } ) {
   return (
 //  returning the list dynamically
     <div className="list" >
       <ul>
-        { initialItems.map((item) => 
+        { items.map((item) => 
         <Item item={item} key={item.id}/> )}
       </ul>
     </div>
