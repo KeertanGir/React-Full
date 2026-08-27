@@ -25,13 +25,18 @@ export default function App() {
       setItems( (items) => items.filter( (item) => item.id !== id ));  
     }
 
+    function handleToggleItem(id){
+      setItems( (items) => items.map( (item) => 
+        item.id === id ? { ...item, packed: !item.packed }  :  item) )
+    }
+
 
 
   return (
     <div className="app">
       <Logo />
       <Form onAddItems={handleAddItems} />
-      <PackageList items= { items}  onDeleteItem={ handleDeleteItem }  />
+      <PackageList items= { items}  onDeleteItem={ handleDeleteItem } onToggleItem={ handleToggleItem } />
       <Status />
 
     </div>
@@ -56,7 +61,7 @@ function Form( { onAddItems } ) {
   // here we declare the states and uses the useState("") hook that we import from the react and destructre that
   // arry and use them in out this components
   const [description, setDescription] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
  
 
 
@@ -120,13 +125,13 @@ function Form( { onAddItems } ) {
     </form>)
 }
 
-function PackageList( { items , onDeleteItem } ) {
+function PackageList( { items , onDeleteItem, onToggleItem } ) {
   return (
 //  returning the list dynamically
     <div className="list" >
       <ul>
         { items.map((item) => 
-        <Item item={item} key={item.id} onDeleteItem = {onDeleteItem} /> )}
+        <Item item={item} key={item.id} onDeleteItem = {onDeleteItem} onToggleItem={ onToggleItem } /> )}
       </ul>
     </div>
 
@@ -135,9 +140,11 @@ function PackageList( { items , onDeleteItem } ) {
 }
 
 // Component for the items
-function Item({ item , onDeleteItem }) {
+function Item({ item , onDeleteItem, onToggleItem }) {
   return (
     <li >
+
+        <input type="checkbox" value={item.packed} onClick={ () => onToggleItem(item.id) }  />
       {/* applying the Styling on the conditions packed or not */}
         <span style={ 
           item.packed ?
