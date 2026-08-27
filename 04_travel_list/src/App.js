@@ -2,12 +2,12 @@
 import { useState } from "react";
 
 // inital items Array containing JS objects
-const initialItems = [
-  { id: 1, description: "Passports", quantity: 2, packed: false },
-  { id: 2, description: "Socks", quantity: 12, packed: false },
-  { id: 3, description: "Bag", quantity: 2, packed: false },
-  { id: 4, description: "Charger", quantity: 12, packed: true },
-];
+// const initialItems = [
+//   { id: 1, description: "Passports", quantity: 2, packed: false },
+//   { id: 2, description: "Socks", quantity: 12, packed: false },
+//   { id: 3, description: "Bag", quantity: 2, packed: false },
+//   { id: 4, description: "Charger", quantity: 12, packed: true },
+// ];
 
 
 // creating app Component That is The responsible of the Whole React application.
@@ -17,16 +17,21 @@ export default function App() {
 
   const [items, setItems] = useState( [] );
 
-    function addItems(item){
+    function handleAddItems(item){
       setItems([...items, item]);
     }
+
+    function handleDeleteItem(id){
+      setItems( (items) => items.filter( (item) => item.id !== id ));  
+    }
+
 
 
   return (
     <div className="app">
       <Logo />
-      <Form onAddItems={addItems} />
-      <PackageList items= { items} />
+      <Form onAddItems={handleAddItems} />
+      <PackageList items= { items}  onDeleteItem={ handleDeleteItem }  />
       <Status />
 
     </div>
@@ -115,13 +120,13 @@ function Form( { onAddItems } ) {
     </form>)
 }
 
-function PackageList( { items } ) {
+function PackageList( { items , onDeleteItem } ) {
   return (
 //  returning the list dynamically
     <div className="list" >
       <ul>
         { items.map((item) => 
-        <Item item={item} key={item.id}/> )}
+        <Item item={item} key={item.id} onDeleteItem = {onDeleteItem} /> )}
       </ul>
     </div>
 
@@ -130,7 +135,7 @@ function PackageList( { items } ) {
 }
 
 // Component for the items
-function Item({ item }) {
+function Item({ item , onDeleteItem }) {
   return (
     <li >
       {/* applying the Styling on the conditions packed or not */}
@@ -139,7 +144,7 @@ function Item({ item }) {
            { textDecoration: "line-through" }  
            : {} 
            } > {item.quantity} {item.description} </span>
-        <button> ❌ </button>
+        <button onClick={ () =>  onDeleteItem(item.id)} > ❌ </button>
      </li>
     
   )
