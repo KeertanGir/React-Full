@@ -130,13 +130,40 @@ function Form({ onAddItems }) {
 }
 
 function PackageList({ items, onDeleteItem, onToggleItem }) {
+ 
+  const [sortBy , setSortBy] = useState("input");
+
+  let sortedItems;
+
+  if( sortBy === "input" ) sortedItems = items;
+
+  if( sortBy === "description" ) sortedItems = items
+  .slice()
+  .sort( (a , b) =>  a.description
+  .localeCompare( 
+    b.description 
+  ))
+
+  if( sortBy === "packed" ) sortedItems = items
+  .slice()
+  .sort( ( a , b ) => 
+    Number( a.packed ) - Number( b.packed ) )
+  
+
   return (
     //  returning the list dynamically
     <div className="list" >
       <ul>
-        {items.map((item) =>
+        {sortedItems.map((item) =>
           <Item item={item} key={item.id} onDeleteItem={onDeleteItem} onToggleItem={onToggleItem} />)}
       </ul>
+
+      <select className="actions" value={sortBy} onChange={ e => setSortBy( e.target.value ) } >
+        <option value="input" > Sort By Items </option>
+        <option value="description" > Sort By description </option>
+        <option value="packed" > Sort By Packed Items </option>
+      </select>
+
     </div>
 
   )
@@ -176,7 +203,6 @@ function Status({ items }) {
 
   const itemCount = items.length;
   const packed = items.filter(item => item.packed === true).length;
-
   const percentage = (packed / itemCount * 100);
 
   return (
