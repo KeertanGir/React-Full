@@ -1,6 +1,11 @@
 // import the useState Hook from the rect 
 import { useState } from "react";
 
+import Logo from "./components/Logo";
+import PackageList from "./components/PackageList";
+import Form from "./components/Form";
+import Status from "./components/Status";
+
 // inital items Array containing JS objects
 // const initialItems = [
 //   { id: 1, description: "Passports", quantity: 2, packed: false },
@@ -32,188 +37,23 @@ export default function App() {
       item.id === id ? { ...item, packed: !item.packed } : item))
   }
 
+  function handleClearAll() {
+
+    const confromed = window.confirm("Are you sure To delete the Whole List of items!");
+
+    if (confromed) {
+      setItems([]);
+    }
+  }
+
 
 
   return (
     <div className="app">
       <Logo />
       <Form onAddItems={handleAddItems} />
-      <PackageList items={items} onDeleteItem={handleDeleteItem} onToggleItem={handleToggleItem} />
+      <PackageList items={items} onDeleteItem={handleDeleteItem} onToggleItem={handleToggleItem} onClearAll={handleClearAll} />
       <Status items={items} />
-
     </div>
   );
 }
-
-
-// This is the component for the logo. normally logos was the icons but here we use simple text
-function Logo() {
-
-  return (<h1> 🌴 Fly Away 💼 </h1>)
-
-}
-
-
-
-// this is the main component that handle the All Form and user intraction and it is responsible for the 
-// creating items and other things.
-// We can also pass the state through the props
-function Form({ onAddItems }) {
-
-  // here we declare the states and uses the useState("") hook that we import from the react and destructre that
-  // arry and use them in out this components
-  const [description, setDescription] = useState("");
-  const [quantity, setQuantity] = useState(1);
-
-
-
-  // this funtion is responsible for the handling the submition of the Form
-  function handleOnSubmit(e) {
-
-    // this is responsiple making this componet prevent from the default setting of the form.
-    // like isme yeh hy k yeh page ko submission ke bad reload krne se rokta hy
-    e.preventDefault();
-
-
-
-    // simple JS - custom validation that helps to stop the empty entries
-    if (!description) return;
-
-    // creating new object for the item
-    const newItem = { description, quantity, packed: false, id: Date.now() }
-
-
-    onAddItems(newItem);
-
-    console.log(newItem);
-
-    // making states on the initial states
-    setDescription("");
-    setQuantity(1);
-
-    // this the concept of the Controlled Elements in which we controls the form elements 
-
-  }
-
-
-  // here we are returning the component in JSX format
-  return (
-    <form className="add-form" onSubmit={handleOnSubmit} >
-
-      <h3> What You need for your ✈ trip </h3>
-
-      {/* controlling Elements with the use of state and the value and onchange props in these elements */}
-      <select value={quantity} onChange={(e) => {
-        setQuantity(Number(e.target.value))
-      }}  >
-
-
-        {/* rendring the quantity options in dunamic way */}
-        {Array.from({ length: 20 }, (_, i) => i + 1).map(num => (
-          <option value={num} key={num} > {num} </option>
-        ))}
-
-      </select>
-
-      {/* same as upside */}
-      <input
-        type="text"
-        placeholder="Enter Item Name"
-        value={description}
-        onChange={(e) => {
-          console.log(e.target.value)
-          setDescription(e.target.value)
-        }}
-      />
-      <button>Add</button>
-    </form>)
-}
-
-function PackageList({ items, onDeleteItem, onToggleItem }) {
- 
-  const [sortBy , setSortBy] = useState("input");
-
-  let sortedItems;
-
-  if( sortBy === "input" ) sortedItems = items;
-
-  if( sortBy === "description" ) sortedItems = items
-  .slice()
-  .sort( (a , b) =>  a.description
-  .localeCompare( 
-    b.description 
-  ))
-
-  if( sortBy === "packed" ) sortedItems = items
-  .slice()
-  .sort( ( a , b ) => 
-    Number( a.packed ) - Number( b.packed ) )
-  
-
-  return (
-    //  returning the list dynamically
-    <div className="list" >
-      <ul>
-        {sortedItems.map((item) =>
-          <Item item={item} key={item.id} onDeleteItem={onDeleteItem} onToggleItem={onToggleItem} />)}
-      </ul>
-
-      <select className="actions" value={sortBy} onChange={ e => setSortBy( e.target.value ) } >
-        <option value="input" > Sort By Items </option>
-        <option value="description" > Sort By description </option>
-        <option value="packed" > Sort By Packed Items </option>
-      </select>
-
-    </div>
-
-  )
-
-}
-
-// Component for the items
-function Item({ item, onDeleteItem, onToggleItem }) {
-  return (
-    <li >
-
-      <input type="checkbox" value={item.packed} onClick={() => onToggleItem(item.id)} />
-      {/* applying the Styling on the conditions packed or not */}
-      <span style={
-        item.packed ?
-          { textDecoration: "line-through" }
-          : {}
-      } > {item.quantity} {item.description} </span>
-      <button onClick={() => onDeleteItem(item.id)} > ❌ </button>
-    </li>
-
-  )
-}
-
-// here is the component for the footer
-function Status({ items }) {
-
-  
-  if (!items.length) {
-      return (
-        <footer className="stats" >
-          <em> Add Items In your list! ✨ </em>
-        </footer>
-      )
-  }
-  
-
-  const itemCount = items.length;
-  const packed = items.filter(item => item.packed === true).length;
-  const percentage = (packed / itemCount * 100);
-
-  return (
-    <footer className="stats" >
-      {
-        percentage === 100 ?
-          (<em> Packing is Completed, You are Ready to Go! ✈ </em>)
-          :
-          (<em> You have {itemCount} items on your List. You pack {packed} items!  Your  {percentage}% packing is Complete </em>)
-      }
-    </footer>)
-
-}
-
