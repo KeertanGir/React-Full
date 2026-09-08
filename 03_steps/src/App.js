@@ -45,19 +45,44 @@ function App() {
           <div className={ step >= 3  ? "active" : "" }>3</div>
         </div>
 
-        <p className="message" >Step {step} :- {messages[step -1]} {test.name} </p>
+      
+        <TextMain step={step} > <p> {messages[step - 1]}</p>  </TextMain>
 
         <div className="buttons" >
-          <button className="button" style={ {backgroundColor: "#77b3ec82", color: "#585d5e"}}
-              onClick={handlePrevious}
-          > <span> Previous </span> </button>
-          <button className="button" style={ {backgroundColor: "#77b3ec82", color: "#585d5e"}}
-               onClick={handleNext}
-          > <span> Next </span> </button>
+          <Button bgColor={"#77b3ec82"} textColor={"#585d5e"} onCLick={handlePrevious} >
+            <span>👈</span> <span> Previous </span>
+          </Button>
+          <Button bgColor={"#77b3ec82"} textColor={"#585d5e"} onCLick={handleNext} >
+            <span> Next </span> <span>👉</span> 
+
+          </Button>
         </div>
       </div>
    } 
    </>
+  );
+
+}
+
+function TextMain( {step , children }){
+  return (
+            <div className="message" >
+
+              <h3> Step {step} </h3>
+             { children }
+
+             </div>
+
+  );
+}
+
+function Button( { bgColor , textColor, onCLick , children} ){
+  return (
+    <button className="button" style={ {backgroundColor: bgColor, color: textColor}}
+               onClick={onCLick}
+          > 
+        {children}      
+    </button>
   );
 }
 
