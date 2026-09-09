@@ -12,7 +12,7 @@ function App() {
 
 function TipCalculator(){
 
-  const [bill, setBill] = useState(0)
+  const [bill, setBill] = useState("")
   const [ yourTip, setYourTip ] = useState(0);
   const [ yourFriendTip, setYourFriendTip ] = useState(0);
 
@@ -23,7 +23,7 @@ function TipCalculator(){
   const tip = bill * ( yourTip + yourFriendTip ) / 2 / 100;
 
 function handleReset(){
-    setBill(0)
+    setBill("")
     setYourTip(0)
     setYourFriendTip(0)
   }
