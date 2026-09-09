@@ -33,8 +33,12 @@ function handleReset(){
       <BillInput bill={ bill } onChangeBill={ setBill } />
       <SelctList tip={ yourTip } setTip={ setYourTip } >How will you wnat to give tip</SelctList>
       <SelctList tip={ yourFriendTip } setTip={ setYourFriendTip }>How will your Friend wnat to give tip</SelctList>
-      <OutPut bill={ bill } tip={tip} />
+       { bill > 0 && 
+       <> 
+       <OutPut bill={ bill } tip={tip} />
       <Reset handleReset={ handleReset }  />
+      </>
+       }
     </div>
   );
 }
